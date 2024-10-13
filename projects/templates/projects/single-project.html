@@ -1,0 +1,23 @@
+{% extends 'main.html' %} {% block content %}
+<h1>Single Project Template</h1>
+
+<!-- Hiển thị tên của dự án -->
+<h2>{{ project.name }}</h2>
+
+<!-- Hiển thị mô tả của dự án -->
+<p>{{ project.description }}</p>
+
+<!-- Hiển thị các tags liên quan đến dự án -->
+<h3>Tags:</h3>
+<ul>
+  {% for tag in tags %}
+  <li>{{ tag.name }}</li>
+  {% empty %}
+  <li>No tags available</li>
+  {% endfor %}
+</ul>
+
+<!-- Thêm nút quay lại trang dự án -->
+<a href="{% url 'projects' %}">Back to Projects</a>
+
+{% endblock content %}

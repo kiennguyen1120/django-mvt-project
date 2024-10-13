@@ -1,0 +1,14 @@
+{% extends 'main.html' %} {% block content %}
+<h1>Delete Project</h1>
+<p>
+  Are you sure you want to delete the project:
+  <strong>{{ project.title }}</strong>?
+</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <button type="submit">Confirm Delete</button>
+  <a href="{% url 'projects' %}">Cancel</a>
+  <!-- Liên kết quay lại trang danh sách dự án -->
+</form>
+{% endblock content %}

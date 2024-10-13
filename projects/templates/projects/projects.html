@@ -1,0 +1,52 @@
+{% extends 'main.html' %} {% block content %} {% if projects %}
+<table border="1">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Demo Link</th>
+      <th>Source Link</th>
+      <th>Tags</th>
+
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Lặp qua các dự án và hiển thị tên cùng liên kết đến trang chi tiết của dự án -->
+    {% for project in projects %}
+    <tr>
+      <td>
+        <a href="{% url 'project' project.id %}">{{ project.title }}</a>
+      </td>
+      <td>{{ project.description|truncatewords:20 }}</td>
+      <!-- Hiển thị mô tả ngắn gọn (20 từ) -->
+      <td>
+        {% if project.demo_link %}
+        <a href="{{ project.demo_link }}" target="_blank">Demo</a>
+        {% else %} N/A {% endif %}
+      </td>
+      <td>
+        {% if project.source_link %}
+        <a href="{{ project.source_link }}" target="_blank">Source</a>
+        {% else %} N/A {% endif %}
+      </td>
+      <td>
+        <!-- Hiển thị tags nếu có -->
+        {% if project.tags.all %} {% for tag in project.tags.all %}
+        <span>{{ tag.name }}</span>
+        {% endfor %} {% else %} No tags {% endif %}
+      </td>
+      <td>
+        <a href="{% url 'update-project' project.id %}">Edit</a>
+      </td>
+      <td>
+        <a href="{% url 'delete-project' project.id %}">Delete </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No projects available.</p>
+{% endif %} {% endblock content %}
